@@ -1,4 +1,5 @@
-// import './App.css'
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 // importo elementi react-router-dom
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,6 +20,18 @@ import PostDetailPage from './pages/PostDetailPage'
 
 
 function App() {
+
+  const [posts, setPosts] = useState([]);
+
+  function fetchPosts() {
+    axios.get("http://localhost:3000/posts/")
+      .then((res) => setPosts(res.data))
+      .catch(err => console.log(err));
+  };
+
+  useEffect(fetchPosts, [])
+
+
 
 
   return (
