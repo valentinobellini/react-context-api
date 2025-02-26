@@ -11,6 +11,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // importa layout
 import MainLayout from './layouts/MainLayout'
 
+// importa il provider
+import GlobalContext from './contexts/GlobalContext';
+
 
 // importa pagine
 import HomePage from './pages/HomePage'
@@ -36,19 +39,20 @@ function App() {
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route element={<MainLayout />} >
-            <Route path="/" element={<HomePage />} />
-            <Route path='/posts'>
-              <Route index element={<PostsPage />} />
-              <Route path=':id' element={<PostDetailPage />} />
+      <GlobalContext.Provider value={{ posts }}>
+        <Router>
+          <Routes>
+            <Route element={<MainLayout />} >
+              <Route path="/" element={<HomePage />} />
+              <Route path='/posts'>
+                <Route index element={<PostsPage />} />
+                <Route path=':id' element={<PostDetailPage />} />
+              </Route>
+              <Route path="/about" element={<AboutPage />} />
             </Route>
-            <Route path="/about" element={<AboutPage />} />
-          </Route>
-        </Routes>
-      </Router>
-
+          </Routes>
+        </Router>
+      </GlobalContext.Provider>
     </>
   )
 }
