@@ -2,16 +2,24 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
+import { useContext } from "react";
+import GlobalContext from './../contexts/GlobalContext'
+
+
+
 export default function PostsList() {
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
 
-    function fetchPosts() {
-        axios.get("http://localhost:3000/posts/")
-            .then((res) => setPosts(res.data))
-            .catch(err => console.log(err));
-    };
+    // function fetchPosts() {
+    //     axios.get("http://localhost:3000/posts/")
+    //         .then((res) => setPosts(res.data))
+    //         .catch(err => console.log(err));
+    // };
 
-    useEffect(fetchPosts, [])
+    // useEffect(fetchPosts, [])
+
+
+    const { posts } = useContext(GlobalContext);
 
     return (
         <div className="public-posts">
